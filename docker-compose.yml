@@ -1,0 +1,47 @@
+version: '2'
+services:
+  api:
+    build:
+      context: ./node
+    image: guidoin/testchat-app
+    ports:
+      - 8080
+    links:
+      - redis:redis
+    restart: always
+    container_name: testchat-app
+    networks:
+      - internal
+  static:
+    image: nginx
+    volumes:
+      - ./site:/usr/share/nginx/html
+    container_name: static-files
+    ports:
+      - 80
+    environment:
+      - NGINX_PORT=80
+    networks:
+      - internal
+  dbmem:
+    image: redis
+    container_name: redis
+    networks:
+      - internal
+  reverse:
+    image: nginx
+    volumes:
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    environment:
+      - NGINX_PORT=80
+    links:
+      - api:api
+      - static:static
+    networks:
+      - internal
+      - external
+networks:
+  internal:
+  external:

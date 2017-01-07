@@ -1,0 +1,17 @@
+{
+  "name": "TestChat",
+  "version": "0.0.1",
+  "description": "Test Chat Application",
+  "author": "Yvan Guidoin",
+  "main": "server.js",
+  "config" : {
+    "port" : "8080"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "socker.io": "1.7.2",
+    "socket.io-redis": "2.0.1"
+  }
+}
