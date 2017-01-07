@@ -7,7 +7,7 @@ services:
     ports:
       - 8080
     links:
-      - redis:redis
+      - dbmem:redis
     restart: always
     container_name: testchat-app
     networks:
@@ -32,6 +32,7 @@ services:
     image: nginx
     volumes:
       - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+    container_name: reverse
     ports:
       - 80:80
     environment:

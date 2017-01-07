@@ -11,7 +11,7 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "socker.io": "1.7.2",
+    "socket.io": "1.7.2",
     "socket.io-redis": "2.0.1"
   }
 }
