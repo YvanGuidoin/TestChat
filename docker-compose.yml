@@ -8,14 +8,14 @@ services:
       - 8080
     links:
       - dbmem:redis
-    restart: always
+    # restart: always
     container_name: testchat-app
     networks:
       - internal
   static:
     image: nginx
     volumes:
-      - ./site:/usr/share/nginx/html
+      - ./site/build:/usr/share/nginx/html
     container_name: static-files
     ports:
       - 80
