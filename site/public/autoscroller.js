@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function(event) {
   var target = document.getElementById("chatbox");
   var config = {
     childList: true,
