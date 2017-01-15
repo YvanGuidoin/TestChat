@@ -1,7 +1,7 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
+import { Col, Label } from 'react-bootstrap';
 
-import MessageBox from './MessageBox';
+import MessageBoxContainer from './MessageBoxContainer';
 
 function formatDateMessage(d){
   let dat = new Date(d);
@@ -16,17 +16,23 @@ function Join(props) {
     return <div>({formatDateMessage(props.mess.datetime)}) {props.mess.sender} has joined the room</div>;
 }
 
-function Chat(props) {
+class Chat extends React.Component {
+  render() {
     return (
       <Col>
+        <h5>
+          <Label>Name: {this.props.name}</Label>&nbsp;
+          <Label>Room: {this.props.room}</Label>
+        </h5>
         <div id="chatbox" className="chatbox scrollable">
-          {props.messages.map((object, i) =>
+          {this.props.messages.map((object, i) =>
             (object.format === "MESSAGE") ? <Message mess={object} key={i} /> : <Join mess={object} key={i} />
           )}
         </div>
-        <MessageBox />
+        <MessageBoxContainer />
       </Col>
-    )
+    );
+  }
 }
 
 export default Chat;

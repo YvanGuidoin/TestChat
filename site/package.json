@@ -2,6 +2,7 @@
   "name": "site",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost/api",
   "devDependencies": {
     "react-scripts": "0.8.4"
   },
@@ -10,7 +11,8 @@
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "socket.io-client": "^1.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

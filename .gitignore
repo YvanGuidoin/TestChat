@@ -11,5 +11,4 @@ coverage
 .env
 npm-debug.log
 
-yarn.lock
 debug.log

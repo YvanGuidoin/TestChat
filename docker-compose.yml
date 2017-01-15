@@ -8,7 +8,8 @@ services:
       - 8080
     links:
       - dbmem:redis
-    # restart: always
+    volumes:
+      - ./node/app:/usr/src/app
     container_name: testchat-app
     networks:
       - internal
