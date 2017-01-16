@@ -30,7 +30,8 @@ export default function controlApp (state = initialState, action) {
       })
     case actions.NEW_ROOM_JOIN_RECEIVED:
       return Object.assign({}, state, {
-        room: action.room
+        room: action.room,
+        messageList: []
       })
     case actions.NEW_NAME_SEND:
       return Object.assign({}, state, {

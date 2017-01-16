@@ -8,12 +8,16 @@ function formatDateMessage(d){
   return dat.getHours() + ":" + dat.getMinutes() + ":" + dat.getSeconds();
 }
 
-function Message(props) {
-    return <div>({formatDateMessage(props.mess.datetime)}) {props.mess.sender}: {props.mess.message}</div>;
+class Message extends React.PureComponent {
+  render(){
+    return <div>({formatDateMessage(this.props.mess.datetime)}) <b>{this.props.mess.sender}</b>: {this.props.mess.message}</div>;
+  }
 }
 
-function Join(props) {
-    return <div>({formatDateMessage(props.mess.datetime)}) {props.mess.sender} has joined the room</div>;
+class Join extends React.PureComponent {
+  render(){
+    return <div>({formatDateMessage(this.props.mess.datetime)}) <b>{this.props.mess.sender}</b> has joined the room</div>;
+  }
 }
 
 class Chat extends React.Component {

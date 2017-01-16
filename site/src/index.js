@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 // Redux
 import { createStore, applyMiddleware } from 'redux';
 import controlApp from './reducers';
-import STATE_TEMP from './state_temp';
 // React Redux
 import { Provider } from 'react-redux';
 // socket
@@ -21,7 +20,7 @@ const logger = store => next => action => {
   return result
 }
 
-let store = createStore(controlApp, STATE_TEMP, applyMiddleware(logger, chatMiddleware));
+let store = createStore(controlApp, applyMiddleware(logger, chatMiddleware));
 createSocket(store);
 
 ReactDOM.render(

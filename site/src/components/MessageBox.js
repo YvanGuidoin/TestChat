@@ -24,7 +24,7 @@ class MessageBox extends React.Component {
   render() {
     return(
       <Col>
-        <Form horizontal>
+        <Form horizontal onSubmit={this.message}>
           <FormGroup>
             <Col xs={11} md={11}>
               <FormControl type="text" placeholder="Enter message" onChange={this.handleChange} value={this.state.messageText} />
