@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  devtool: 'eval',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
