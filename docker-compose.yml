@@ -8,8 +8,6 @@ services:
       - 8080
     links:
       - dbmem:redis
-    # volumes:
-    #   - ./node/app:/usr/src/app
     container_name: testchat-app
     environment:
       - LOG_NODE_EVENT_SOCKET=DEV
@@ -37,14 +35,12 @@ services:
     networks:
       - internal
   reverse:
-    image: nginx
+    image: haproxy
     volumes:
-      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./reverse-proxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     container_name: reverse
     ports:
       - 80:80
-    environment:
-      - NGINX_PORT=80
     links:
       - api
       - static
