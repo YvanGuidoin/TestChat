@@ -46,8 +46,8 @@ services:
     environment:
       - NGINX_PORT=80
     links:
-      - api:api
-      - static:static
+      - api
+      - static
     networks:
       - internal
       - external
