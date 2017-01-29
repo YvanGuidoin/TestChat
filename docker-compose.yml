@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   api:
     build:
@@ -8,11 +8,16 @@ services:
       - 8080
     links:
       - dbmem:redis
-    volumes:
-      - ./node/app:/usr/src/app
+    # volumes:
+    #   - ./node/app:/usr/src/app
     container_name: testchat-app
     networks:
       - internal
+    # resources:
+    #   limits:
+    #     cpus: '0.1'
+    #   reservation:
+    #     cpus: '0.001'
   static:
     image: nginx
     volumes:

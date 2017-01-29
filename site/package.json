@@ -1,6 +1,6 @@
 {
   "name": "site",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "build": "webpack --progress --colors --config webpack.config.js",
     "watch": "webpack --progress --colors -w --config webpack.config.js"

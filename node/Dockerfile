@@ -5,9 +5,11 @@ ENV APP_DIR=/usr/src/app
 RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 
-VOLUME $APP_DIR
+# VOLUME $APP_DIR
 # RUN npm install
 
-EXPOSE 80
+COPY ./app $APP_DIR
+
+EXPOSE 8080
 
 CMD ["npm", "start"]
