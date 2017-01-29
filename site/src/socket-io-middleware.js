@@ -20,7 +20,9 @@ export function chatMiddleware(store) {
 export function createSocket(store) {
   socket = io.connect('http://localhost', { path: '/api'});
   socket.on('connection', function (data) {
-    console.log("Connected!");
+    console.log("Connected! " + JSON.stringify(data));
+    var n = store.getState().name;
+    if(n !== "") store.dispatch(action.newName(n));
   });
   socket.on('join', function(data) {
     store.dispatch(actions.newRoomJoinReceived(data));

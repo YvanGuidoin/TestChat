@@ -11,6 +11,8 @@ services:
     # volumes:
     #   - ./node/app:/usr/src/app
     container_name: testchat-app
+    environment:
+      - LOG_NODE_EVENT_SOCKET=DEV
     networks:
       - internal
     # resources:

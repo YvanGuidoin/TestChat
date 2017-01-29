@@ -1,19 +1,24 @@
 const HASH_ROOMS = "HASH_TO_MANAGE_ROOMS";
+var LOG_NODE_EVENT_SOCKET = process.env.LOG_NODE_EVENT_SOCKET;
 
 function logEvent(name_event, data, socket){
-  console.log("new "+name_event+" recu: "+JSON.stringify(data)+" de: "+socket.username+" in room: "+socket.room);
+  if(LOG_NODE_EVENT_SOCKET === "DEV") console.log("new "+name_event+" recu: "+JSON.stringify(data)+" de: "+socket.username+" in room: "+socket.room);
 }
 
 module.exports = (io, client, redis) => {
 
+  function sendNewRoomList(err, res){
+    if(err) console.log("Erreur Redis: " + JSON.stringify(err));
+    else client.hgetall(HASH_ROOMS, (err, obj) => {
+      if(LOG_NODE_EVENT_SOCKET === "DEV") console.log("New rooms: " + JSON.stringify(obj));
+      io.emit("newRoomList", obj);
+    });
+  }
+
   // init room lobby to 0 if no node has already initialized it
   client.hmget(HASH_ROOMS, "lobby", (err, obj) => {
     if(obj[0] == null){
-      client.hmset(HASH_ROOMS, "lobby", 0);
-      client.hgetall(HASH_ROOMS, (err, obj) => {
-        console.log("New rooms: " + JSON.stringify(obj));
-        io.emit("newRoomList", obj);
-      });
+      client.hmset(HASH_ROOMS, "lobby", 0, sendNewRoomList);
     }
   });
 
@@ -21,14 +26,10 @@ module.exports = (io, client, redis) => {
     // initialize if no room already, or increment it
     client.hmget(HASH_ROOMS, room, (err, obj) => {
       if(obj[0] == null){
-        client.hmset(HASH_ROOMS, room, 1);
+        client.hmset(HASH_ROOMS, room, 1, sendNewRoomList);
       } else {
-        client.hincrby(HASH_ROOMS, room, 1);
+        client.hincrby(HASH_ROOMS, room, 1, sendNewRoomList);
       }
-      client.hgetall(HASH_ROOMS, (err, obj) => {
-        console.log("New rooms: " + JSON.stringify(obj));
-        io.emit("newRoomList", obj);
-      });
     });
   }
 
@@ -37,20 +38,17 @@ module.exports = (io, client, redis) => {
     client.hmget(HASH_ROOMS, room, (err, obj) => {
       if(obj[0] != null){
         if(obj[0] > 1){
-          client.hincrby(HASH_ROOMS, room, -1);
+          client.hincrby(HASH_ROOMS, room, -1, sendNewRoomList);
         } else {
-          if(room !== "lobby") client.hdel(HASH_ROOMS, room);
-          else client.hmset(HASH_ROOMS, "lobby", 0);
+          if(room !== "lobby") client.hdel(HASH_ROOMS, room, sendNewRoomList);
+          else client.hmset(HASH_ROOMS, "lobby", 0, sendNewRoomList);
         }
       }
-      client.hgetall(HASH_ROOMS, (err, obj) => {
-        console.log("New rooms: " + JSON.stringify(obj));
-        io.emit("newRoomList", obj);
-      });
     });
   }
 
-  io.on('connection', (socket) => {
+  io.sockets.on('connection', (socket) => {
+    logEvent("connection", {}, socket);
     socket.emit('connection', {});
     socket.room = "lobby";
     socket.join("lobby");
