@@ -19,7 +19,7 @@ services:
     #   reservation:
     #     cpus: '0.001'
   static:
-    image: nginx
+    image: nginx:alpine
     volumes:
       - ./site/build:/usr/share/nginx/html
     container_name: static-files
@@ -30,7 +30,7 @@ services:
     networks:
       - internal
   dbmem:
-    image: redis
+    image: redis:alpine
     container_name: redis
     networks:
       - internal
@@ -46,7 +46,7 @@ services:
     ports:
       - 80
   reverse:
-    image: haproxy
+    image: haproxy:alpine
     volumes:
       - ./reverse-proxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     container_name: reverse
