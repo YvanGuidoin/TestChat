@@ -8,7 +8,7 @@ WORKDIR $APP_DIR
 # VOLUME $APP_DIR
 # RUN npm install
 
-COPY ./app $APP_DIR
+COPY . $APP_DIR
 
 EXPOSE 8080
 
