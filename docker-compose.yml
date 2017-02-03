@@ -10,7 +10,7 @@ services:
       - dbmem:redis
     container_name: testchat-app
     environment:
-      - LOG_NODE_EVENT_SOCKET=DEV
+      - LOG_NODE_EVENT_SOCKET=PROD
     networks:
       - internal
     # resources:
@@ -34,6 +34,17 @@ services:
     container_name: redis
     networks:
       - internal
+  chatbot:
+    build:
+      context: ./ChatBot
+    image: guidoin/chatbot
+    container_name: chatbot
+    links:
+      - reverse:reverse
+    networks:
+      - external
+    ports:
+      - 80
   reverse:
     image: haproxy
     volumes:
