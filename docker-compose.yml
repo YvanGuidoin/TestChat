@@ -8,9 +8,8 @@ services:
       - 8080
     links:
       - dbmem:redis
-    container_name: testchat-app
     environment:
-      - LOG_NODE_EVENT_SOCKET=PROD
+      - LOG_NODE_EVENT_SOCKET=DEV
     networks:
       - internal
     # resources:
@@ -53,8 +52,8 @@ services:
     ports:
       - 80:80
     links:
-      - api
       - static
+      - api
     networks:
       - internal
       - external

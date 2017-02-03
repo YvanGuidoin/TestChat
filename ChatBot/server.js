@@ -1,6 +1,6 @@
 const io = require('socket.io-client');
 
-var socket = io.connect("http://reverse", { path: "/api" });
+var socket = io.connect("http://reverse", { path: "/socket" });
 socket.on('connection', () => {
   console.log("Connected!");
   socket.emit('name', "Bot_hello");

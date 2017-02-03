@@ -18,7 +18,7 @@ export function chatMiddleware(store) {
 };
 
 export function createSocket(store) {
-  socket = io.connect('ws://localhost', { path: '/api'});
+  socket = io.connect('ws://localhost', { path: '/socket'});
   socket.on('connection', function (data) {
     console.log("Connected! " + JSON.stringify(data));
     var n = store.getState().name;
