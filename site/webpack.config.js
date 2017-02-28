@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  cache: true,
   devtool: 'cheap-module-source-map',
   entry: './src/index.js',
   output: {
