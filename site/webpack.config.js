@@ -34,30 +34,30 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      comments: false,
-      compress: {
-        unused: true,
-        dead_code: true,
-        warnings: false,
-        pure_getters: true,
-        drop_debugger: true,
-        conditionals: true,
-        evaluate: true,
-        drop_console: true,
-        sequences: true,
-        unsafe: true,
-        unsafe_comps: true,
-        screw_ie8: true,
-        booleans: true
-      },
-      output: {
-        comments: false,
-      }
-    }),
+    // new webpack.optimize.AggressiveMergingPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   mangle: true,
+    //   comments: false,
+    //   compress: {
+    //     unused: true,
+    //     dead_code: true,
+    //     warnings: false,
+    //     pure_getters: true,
+    //     drop_debugger: true,
+    //     conditionals: true,
+    //     evaluate: true,
+    //     drop_console: true,
+    //     sequences: true,
+    //     unsafe: true,
+    //     unsafe_comps: true,
+    //     screw_ie8: true,
+    //     booleans: true
+    //   },
+    //   output: {
+    //     comments: false,
+    //   }
+    // }),
     new HtmlWebpackPlugin({
       inject: true,
       template: 'public/index.html',

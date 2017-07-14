@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   api:
     build:
@@ -11,52 +11,55 @@ services:
     environment:
       - LOG_NODE_EVENT_SOCKET=DEV
     networks:
-      - internal
-    # resources:
-    #   limits:
-    #     cpus: '0.1'
-    #   reservation:
-    #     cpus: '0.001'
+      internal:
+        aliases:
+          - api
   static:
-    image: nginx:alpine
-    volumes:
-      - ./site/build:/usr/share/nginx/html
+    build:
+      context: ./site
+    image: guidoin/nginx-testchatapp
+    # volumes:
+    #   - ./site/build:/usr/share/nginx/html
     container_name: static-files
     ports:
       - 80
     environment:
       - NGINX_PORT=80
     networks:
-      - internal
+      internal:
+        aliases:
+          - static
   dbmem:
     image: redis:alpine
     container_name: redis
     networks:
-      - internal
-  chatbot:
-    build:
-      context: ./ChatBot
-    image: guidoin/chatbot
-    container_name: chatbot
-    links:
-      - reverse:reverse
-    networks:
-      - external
-    ports:
-      - 80
+      internal:
+        aliases:
+          - dbmem
   reverse:
-    image: haproxy:alpine
-    volumes:
-      - ./reverse-proxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    build:
+      context: ./reverse-proxy
+    image: guidoin/haproxy-testchat
     container_name: reverse
     ports:
       - 80:80
-    links:
+    depends_on:
       - static
       - api
     networks:
       - internal
       - external
+  # chatbot:
+  #   build:
+  #     context: ./ChatBot
+  #   image: guidoin/chatbot
+  #   container_name: chatbot
+  #   depends_on:
+  #     - reverse
+  #   networks:
+  #     - external
+  #   ports:
+  #     - 80
 networks:
   internal:
   external:
