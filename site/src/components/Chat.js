@@ -23,17 +23,19 @@ class Join extends React.PureComponent {
 class Chat extends React.Component {
   render() {
     return (
-      <Col>
-        <h5>
+      <Col className="makeFlex">
+        <h5 className="flexStable">
           <Label>Name: {this.props.name}</Label>&nbsp;
           <Label>Room: {this.props.room}</Label>
         </h5>
-        <div id="chatbox" className="chatbox scrollable">
-          {this.props.messages.map((object, i) =>
-            (object.format === "MESSAGE") ? <Message mess={object} key={i} /> : <Join mess={object} key={i} />
-          )}
+        <div id="chatbox" className="chatbox scrollable flexGrow">
+          <div>
+            {this.props.messages.map((object, i) =>
+              (object.format === "MESSAGE") ? <Message mess={object} key={i} /> : <Join mess={object} key={i} />
+            )}
+          </div>
         </div>
-        <MessageBoxContainer />
+        <MessageBoxContainer className="flexStable" />
       </Col>
     );
   }

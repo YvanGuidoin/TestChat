@@ -54380,10 +54380,10 @@ var Chat = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactBootstrap.Col,
-        null,
+        { className: 'makeFlex' },
         _react2.default.createElement(
           'h5',
-          null,
+          { className: 'flexStable' },
           _react2.default.createElement(
             _reactBootstrap.Label,
             null,
@@ -54400,12 +54400,16 @@ var Chat = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { id: 'chatbox', className: 'chatbox scrollable' },
-          this.props.messages.map(function (object, i) {
-            return object.format === "MESSAGE" ? _react2.default.createElement(Message, { mess: object, key: i }) : _react2.default.createElement(Join, { mess: object, key: i });
-          })
+          { id: 'chatbox', className: 'chatbox scrollable flexGrow' },
+          _react2.default.createElement(
+            'div',
+            null,
+            this.props.messages.map(function (object, i) {
+              return object.format === "MESSAGE" ? _react2.default.createElement(Message, { mess: object, key: i }) : _react2.default.createElement(Join, { mess: object, key: i });
+            })
+          )
         ),
-        _react2.default.createElement(_MessageBoxContainer2.default, null)
+        _react2.default.createElement(_MessageBoxContainer2.default, { className: 'flexStable' })
       );
     }
   }]);
@@ -54751,7 +54755,7 @@ exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/li
 
 
 // module
-exports.push([module.i, "html, body, #root, [data-reactroot] {\n  height: 100%;\n  min-height: 100%;\n}\n\n.floatRight {\n  float: right;\n}\n\n.chatbox {\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  padding-top: 6px;\n  padding-bottom: 6px;\n  padding-left: 12px;\n  padding-right: 12px;\n}\n\n.scrollable {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n", ""]);
+exports.push([module.i, "html, body, #root, [data-reactroot] {\n  height: 100%;\n  min-height: 100%;\n}\n\n.floatRight {\n  float: right;\n}\n\n.chatbox {\n  border: 1px solid #ccc;\n  border-radius: 4px;\n  padding-top: 6px;\n  padding-bottom: 6px;\n  padding-left: 12px;\n  padding-right: 12px;\n}\n\n.scrollable {\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n\n.makeFlex {\n  display: flex;\n  flex-direction: column;\n}\n\n.flexStable {\n  flex: 0 0 auto;\n}\n\n.flexGrow {\n  flex: 1 0 auto;\n}\n", ""]);
 
 // exports
 

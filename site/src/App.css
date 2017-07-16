@@ -20,3 +20,16 @@ html, body, #root, [data-reactroot] {
   overflow-y: auto;
   overflow-x: hidden;
 }
+
+.makeFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexStable {
+  flex: 0 0 auto;
+}
+
+.flexGrow {
+  flex: 1 0 auto;
+}
